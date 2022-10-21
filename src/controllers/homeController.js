@@ -12,16 +12,40 @@ let getHomePage = async (req, res) => {
   }
 };
 
-let getCRUD = (req, res) => {
-  return res.render('crud.ejs');
+let createUserForm = (req, res) => {
+  return res.render('createUser.ejs');
 };
 
 let postCRUD = async (req, res) => {
   await CRUDService.createNewUser(req.body);
-  return res.render('crud.ejs');
+  let data = await CRUDService.getAllUser();
+  return res.render('showListUser.ejs', {
+    data: data,
+  });
 };
 
-let showCRUD = async (req, res) => {
+let getListUser = async (req, res) => {
+  let data = await CRUDService.getAllUser();
+  return res.render('showListUser.ejs', {
+    data: data,
+  });
+};
+
+let editUser = async (req, res) => {
+  let userId = req.query.id;
+  if (userId) {
+    let userData = await CRUDService.getUserInforById(userId);
+    return res.render('editUser.ejs', {
+      userData: userData,
+    });
+  } else {
+    return res.send('Not found user!!');
+  }
+};
+
+let editUserComplete = async (req, res) => {
+  let updateData = req.body;
+  await CRUDService.updateUser(updateData);
   let data = await CRUDService.getAllUser();
   return res.render('showListUser.ejs', {
     data: data,
@@ -30,7 +54,9 @@ let showCRUD = async (req, res) => {
 
 module.exports = {
   getHomePage: getHomePage,
-  getCRUD: getCRUD,
+  createUserForm: createUserForm,
   postCRUD: postCRUD,
-  showCRUD: showCRUD,
+  getListUser: getListUser,
+  editUser: editUser,
+  editUserComplete: editUserComplete,
 };
