@@ -46,9 +46,9 @@ let editUser = async (req, res) => {
 let editUserComplete = async (req, res) => {
   let updateData = req.body;
   await CRUDService.updateUser(updateData);
-  let data = await CRUDService.getAllUser();
+  let allData = await CRUDService.getAllUser();
   return res.render('showListUser.ejs', {
-    data: data,
+    data: allData,
   });
 };
 
