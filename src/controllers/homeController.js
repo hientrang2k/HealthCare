@@ -52,6 +52,19 @@ let editUserComplete = async (req, res) => {
   });
 };
 
+let deleteUser = async (req, res) => {
+  let userId = req.query.id;
+  if (userId) {
+    await CRUDService.deleteUserById(userId);
+    let allData = await CRUDService.getAllUser();
+    return res.render('showListUser.ejs', {
+      data: allData,
+    });
+  } else {
+    return res.send('Not found user!!');
+  }
+};
+
 module.exports = {
   getHomePage: getHomePage,
   createUserForm: createUserForm,
@@ -59,4 +72,5 @@ module.exports = {
   getListUser: getListUser,
   editUser: editUser,
   editUserComplete: editUserComplete,
+  deleteUser: deleteUser,
 };

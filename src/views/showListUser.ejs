@@ -59,7 +59,12 @@
                 class="btn btn-outline-primary"
                 >Edit</a
               >
-              <a type="button" class="btn btn-outline-danger">Delete</a>
+              <a
+                href="/deleteUser?id=<%= data[i].id %>"
+                type="button"
+                class="btn btn-outline-danger"
+                >Delete</a
+              >
             </td>
           </tr>
           <%}%>
