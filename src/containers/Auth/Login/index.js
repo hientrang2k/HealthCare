@@ -23,6 +23,7 @@ class Login extends Component {
     this.state = {
       username: '',
       password: '',
+      showPassword: false,
     };
   }
 
@@ -37,6 +38,12 @@ class Login extends Component {
       password: event.target.value,
     });
   };
+
+  showPass = () => {
+    this.setState({
+      showPassword: !this.state.showPassword
+    })
+  }
 
   handleSubmit = () => {
     console.log(this.state);
@@ -69,16 +76,15 @@ class Login extends Component {
               </Grid>
               <Grid className='text-field-item'>
                 <label>Password</label>
-                <div>
+                <div className='password-block'>
                   <input
-                    type='text'
+                    type={this.state.showPassword ? 'text' : 'password'}
                     name='password'
                     className='input-item'
                     onChange={(event) => this.handleChangePassword(event)}
                     value={this.state.password}
                   />
-                  <i class='fa-solid fa-eye' />
-                  <i className='fa-sharp fa-solid fa-eye-slash' />
+                  <i class={this.state.showPassword ? "fas fa-eye showPasswordIcon" : "fas fa-eye-slash showPasswordIcon"} onClick={() => this.showPass()} />
                 </div>
               </Grid>
               <Button
@@ -105,7 +111,7 @@ class Login extends Component {
                   <img alt='gg' src={google} width={24} height={24} />
                 </div>
                 <div>
-                  <img alt='gg' src={facebook} width={24} height={24} />
+                  <img alt='fb' src={facebook} width={24} height={24} />
                 </div>
               </div>
 
@@ -116,7 +122,7 @@ class Login extends Component {
             </Box>
           </Box>
         </div>
-      </div>
+      </div >
     );
   }
 }
