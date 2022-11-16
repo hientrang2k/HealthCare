@@ -2,21 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import * as actions from '../../../store/actions';
-import { Box, TextField } from '@mui/material';
+import { Box, Grid, Button } from '@mui/material';
 import './style.scss';
-import { Button } from 'reactstrap';
 import google from './img/google.png';
 import facebook from './img/facebook.png';
 
 const style = {
   width: 400,
-  //   height: 400,
   backgroundColor: '#fff',
   borderRadius: 15,
   boxShadow: '4px 4px 6px #000',
   display: 'flex',
-  //   alignItems: 'center',
-  //   justifyContent: 'center',
   flexDirection: 'column',
   padding: '30px 24px',
 };
@@ -24,8 +20,27 @@ const style = {
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.btnLogin = React.createRef();
+    this.state = {
+      username: '',
+      password: '',
+    };
   }
+
+  handleChangeUsename = (event) => {
+    this.setState({
+      username: event.target.value,
+    });
+  };
+
+  handleChangePassword = (event) => {
+    this.setState({
+      password: event.target.value,
+    });
+  };
+
+  handleSubmit = () => {
+    console.log(this.state);
+  };
 
   render() {
     return (
@@ -34,7 +49,6 @@ class Login extends Component {
           <Box sx={style}>
             <div className='login-title'>Login</div>
             <Box
-              component='form'
               sx={{
                 width: '100%',
                 display: 'flex',
@@ -43,19 +57,37 @@ class Login extends Component {
                 flexDirection: 'column',
               }}
             >
-              <TextField
-                id='username'
-                label='User name'
-                variant='outlined'
-                fullWidth
-                className='text-field-item'
-              />
-              <TextField
-                id='password'
-                label='Password'
-                variant='outlined'
-                fullWidth
-              />
+              <Grid className='text-field-item'>
+                <label>User name</label>
+                <input
+                  type='text'
+                  name='username'
+                  className='input-item'
+                  onChange={(event) => this.handleChangeUsename(event)}
+                  value={this.state.username}
+                />
+              </Grid>
+              <Grid className='text-field-item'>
+                <label>Password</label>
+                <div>
+                  <input
+                    type='text'
+                    name='password'
+                    className='input-item'
+                    onChange={(event) => this.handleChangePassword(event)}
+                    value={this.state.password}
+                  />
+                  <i class='fa-solid fa-eye' />
+                  <i className='fa-sharp fa-solid fa-eye-slash' />
+                </div>
+              </Grid>
+              <Button
+                size='large'
+                className='login-button'
+                onClick={() => this.handleSubmit()}
+              >
+                LogIn
+              </Button>
             </Box>
             <div className='forgotPassword'>Forgot password?</div>
             <Box
@@ -67,9 +99,6 @@ class Login extends Component {
                 flexDirection: 'column',
               }}
             >
-              <Button size='large' className='login-button'>
-                LogIn
-              </Button>
               <div className='other-login'>--Or login with--</div>
               <div className='social-network'>
                 <div className='social-google'>

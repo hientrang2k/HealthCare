@@ -13,7 +13,15 @@
         margin: 10px auto 30px;
     }
     .text-field-item{
+        width: 100%;
+        display: flex;
         margin-bottom: 16px;
+        flex-direction: column; 
+    }
+    .input-item{
+        margin-top: 6px;
+        height: 40px;
+        padding: 0 20px;
     }
     .login-button{
         width: 100%;
@@ -21,7 +29,10 @@
         color: #fff;
         background-color: #1c94a5;
         border-radius: 15px;
-        margin-top: 40px;
+        margin-top: 20px;
+        &:hover {
+            background-color: #057c8b;
+        }
     }
     .forgotPassword{
         font-size: 13px;
